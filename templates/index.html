@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="hero-section bg-primary text-white py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4">Smart & Efficient Inventory Management for Your Business</h1>
+                <p class="lead mb-4">Track, manage, and optimize your inventory in real-time with our AI-powered solution.</p>
+                <div class="d-flex gap-3">
+                    <a href="/register" class="btn btn-light btn-lg">Get Started Free</a>
+                    <a href="#demo" class="btn btn-outline-light btn-lg">Request Demo</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <img src="{{ url_for('static', filename='image1.webp') }}" class="img-fluid rounded shadow-lg" alt="Dashboard Preview">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Powerful Features for Your Business</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-chart-line fa-3x text-primary mb-3"></i>
+                        <h3 class="h5">Real-time Tracking</h3>
+                        <p>Monitor inventory levels across all locations in real-time with automated updates.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-qrcode fa-3x text-primary mb-3"></i>
+                        <h3 class="h5">Barcode & QR Scanning</h3>
+                        <p>Quickly scan and update inventory using built-in barcode and QR code functionality.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <i class="fas fa-bell fa-3x text-primary mb-3"></i>
+                        <h3 class="h5">Smart Alerts</h3>
+                        <p>Get automated notifications for low stock, reorder points, and inventory discrepancies.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="how-it-works py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">How It Works</h2>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="circle-icon mb-3">1</div>
+                    <h3 class="h5">Sign Up</h3>
+                    <p>Create your account in minutes</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="circle-icon mb-3">2</div>
+                    <h3 class="h5">Add Products</h3>
+                    <p>Import or add your inventory items</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="circle-icon mb-3">3</div>
+                    <h3 class="h5">Track Inventory</h3>
+                    <p>Monitor stock levels in real-time</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="text-center">
+                    <div class="circle-icon mb-3">4</div>
+                    <h3 class="h5">Get Insights</h3>
+                    <p>Access reports and analytics</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testimonials py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Trusted by Growing Businesses</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ url_for('static', filename='image2.webp') }}" class="rounded-circle me-3" width="60" alt="Client">
+                            <div>
+                                <h5 class="mb-0">John Smith</h5>
+                                <p class="text-muted mb-0">CEO, TechCorp</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"This system has revolutionized how we manage our inventory. The real-time tracking is invaluable."</p>
+                    </div>
+                </div>
+            </div>
+         
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ url_for('static', filename='image2.webp') }}" class="rounded-circle me-3" width="60" alt="Client">
+                            <div>
+                                <h5 class="mb-0">Travis Head</h5>
+                                <p class="text-muted mb-0">CEO, OpenBox</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"This system has revolutionized how we manage our inventory. The real-time tracking is invaluable."</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <img src="{{ url_for('static', filename='image2.webp') }}" class="rounded-circle me-3" width="60" alt="Client">
+                            <div>
+                                <h5 class="mb-0">Andrewtate</h5>
+                                <p class="text-muted mb-0">CEO, Explore World</p>
+                            </div>
+                        </div>
+                        <p class="mb-0">"This system has revolutionized how we manage our inventory. The real-time tracking is invaluable."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Pricing -->
+<section class="pricing py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Choose Your Plan</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h3>Basic</h3>
+                        <div class="price my-4">
+                            <span class="h1">$29</span>/month
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">Up to 1,000 items</li>
+                            <li class="mb-3">2 Users</li>
+                            <li class="mb-3">Basic Reports</li>
+                        </ul>
+                        <a href="/register" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more pricing tiers -->
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h3>Advance</h3>
+                        <div class="price my-4">
+                            <span class="h1">$199</span>/month
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">Up to 1,000 items</li>
+                            <li class="mb-3">10 Users</li>
+                            <li class="mb-3">Advance Reports</li>
+                        </ul>
+                        <a href="/register" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h3>Pro Version</h3>
+                        <div class="price my-4">
+                            <span class="h1">$999</span>/month
+                        </div>
+                        <ul class="list-unstyled">
+                            <li class="mb-3">Up to 1,999 items</li>
+                            <li class="mb-3">Unlimited Users</li>
+                            <li class="mb-3">Advance Reports and Pro Properties</li>
+                        </ul>
+                        <a href="/register" class="btn btn-primary">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Integrations -->
+<section class="integrations py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Seamless Integrations</h2>
+        <div class="row align-items-center">
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ url_for('static', filename='image3.png') }}" class="img-fluid" alt="Shopify">
+            </div>
+            
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ url_for('static', filename='Google.webp') }}" class="img-fluid" alt="Shopify">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ url_for('static', filename='Amazon.jpeg') }}" class="img-fluid" alt="Shopify">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ url_for('static', filename='Flipkart.avif') }}" class="img-fluid" alt="Shopify">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ url_for('static', filename='meesho.png') }}" class="img-fluid" alt="Shopify">
+            </div>
+            <div class="col-md-2 col-4 mb-4">
+                <img src="{{ url_for('static', filename='Hilti.png') }}" class="img-fluid" alt="Shopify">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Security -->
+<section class="security py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Enterprise-Grade Security</h2>
+        <div class="row text-center">
+            <div class="col-md-4">
+                <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                <h3 class="h5">Data Encryption</h3>
+                <p>256-bit SSL encryption for all data</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-lock fa-3x text-primary mb-3"></i>
+                <h3 class="h5">GDPR Compliant</h3>
+                <p>Full compliance with data protection regulations</p>
+            </div>
+            <div class="col-md-4">
+                <i class="fas fa-backup fa-3x text-primary mb-3"></i>
+                <h3 class="h5">Regular Backups</h3>
+                <p>Automated daily backups of your data</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq py-5">
+    <div class="container">
+        <h2 class="text-center mb-5">Frequently Asked Questions</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <h3 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                How do I get started?
+                            </button>
+                        </h3>
+                        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Simply sign up for a free account and follow our quick setup guide. You can be up and running in minutes.
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Final CTA -->
+<section class="cta py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-4">Ready to Transform Your Inventory Management?</h2>
+        <p class="lead mb-4">Join thousands of businesses already using our solution</p>
+        <a href="/register" class="btn btn-light btn-lg">Start Free Trial</a>
+    </div>
+</section>
+
+
+{% endblock %}

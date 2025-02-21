@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}Inventory Management{% endblock %}
+{% block content %}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Inventory Management</h2>
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addItemModal">
+            Add New Item
+        </button>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <div id="alertContainer"></div>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Item Name</th>
+                            <th>Category</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTable">
+                        {% for item in items %}
+                        <tr>
+                            <td>{{ item.id }}</td>
+                            <td>{{ item.name }}</td>
+                            <td>{{ item.category }}</td>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ item.price }}</td>
+                            <td>
+                                <a href="{{ url_for('edit_inventory_item', item_id = item.id ) }}"><button class="btn btn-sm btn-warning" onclick="editItem('{{ item.id }}')">Edit</button></a>
+                                <button class="btn btn-sm btn-danger" onclick="deleteItem('{{ item.id }}')">Delete</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Item Modal -->
+<div class="modal fade" id="addItemModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add New Item</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div id="modalAlertContainer"></div>
+                <form id="addItemForm" onsubmit="return false;">
+                    <div class="mb-3">
+                        <label class="form-label">Item Name</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <input type="text" class="form-control" name="category" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Quantity</label>
+                        <input type="number" min="0" class="form-control" name="quantity" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Price</label>
+                        <input type="number" min="0" step="0.01" class="form-control" name="price" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="saveItem()">Save Item</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Show alert message function
+function showAlert(message, type, container = 'alertContainer') {
+    const alertDiv = document.getElementById(container);
+    alertDiv.innerHTML = `
+        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    `;
+}
+
+// Save item function
+async function saveItem() {
+    const form = document.getElementById('addItemForm');
+    const formData = new FormData(form);
+    
+    const data = {
+        name: formData.get('name'),
+        category: formData.get('category'),
+        quantity: parseInt(formData.get('quantity')),
+        price: parseFloat(formData.get('price'))
+    };
+
+    try {
+        const response = await fetch('/api/inventory', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || 'Failed to save item');
+        }
+
+        // Success
+        showAlert('Item saved successfully!', 'success');
+        form.reset();
+        //$('#addItemModal').modal('hide');
+        location.reload(); // Reload to show new item
+
+    } 
+    catch (error) {
+        showAlert(error.message, 'danger', 'modalAlertContainer');
+    }
+}
+
+// Delete item function
+async function deleteItem(itemId) {
+    if (!confirm('Are you sure you want to delete this item?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/inventory/${itemId}`, {
+            method: 'DELETE'
+        });
+
+        if (!response.ok) {
+            const result = await response.json();
+            throw new Error(result.error || 'Failed to delete item');
+        }
+
+        showAlert('Item deleted successfully!', 'success');
+        location.reload(); // Reload to update table
+
+    } catch (error) {
+        showAlert(error.message, 'danger');
+    }
+}
+</script>
+{% endblock %}

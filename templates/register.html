@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center py-3">
+                    <h4 class="mb-0"><i class="bi bi-person-plus me-2"></i>Create an Account</h4>
+                </div>
+                <div class="card-body p-4">
+                    <form method="POST" action="{{ url_for('register') }}">
+                        {{ form.hidden_tag() }}
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="first_name" class="form-label">First Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    {{ form.first_name(class="form-control", id="first_name", placeholder="Enter your first name") }}
+                                </div>
+                                {% if form.first_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.first_name.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="last_name" class="form-label">Last Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                    {{ form.last_name(class="form-control", id="last_name", placeholder="Enter your last name") }}
+                                </div>
+                                {% if form.last_name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.last_name.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                                {{ form.email(class="form-control", id="email", placeholder="Enter your email") }}
+                            </div>
+                            {% if form.email.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.email.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">We'll never share your email with anyone else.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                {{ form.password(class="form-control", id="password", placeholder="Create a password") }}
+                            </div>
+                            {% if form.password.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.password.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            <div class="form-text">Password must be at least 8 characters and include a number and special character.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                {{ form.confirm_password(class="form-control", id="confirm_password", placeholder="Confirm your password") }}
+                            </div>
+                            {% if form.confirm_password.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.confirm_password.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="mb-3 form-check">
+                            {{ form.accept_tos(class="form-check-input", id="accept_tos") }}
+                            <label class="form-check-label" for="accept_tos">
+                                I agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#tosModal">Terms of Service</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                            </label>
+                            {% if form.accept_tos.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {% for error in form.accept_tos.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                <i class="bi bi-person-plus me-2"></i>Create Account
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer bg-light text-center p-3">
+                    <p class="mb-0">Already have an account? <a href="{{ url_for('login') }}" class="text-primary">Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div class="modal fade" id="tosModal" tabindex="-1" aria-labelledby="tosModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tosModalLabel">Terms of Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Terms</h6>
+                <p>By accessing this website, you are agreeing to be bound by these website Terms and Conditions of Use and agree that you are responsible for compliance with any applicable local laws.</p>
+                
+                <h6>2. Use License</h6>
+                <p>Permission is granted to temporarily access the materials on InventoryPro's website for personal, non-commercial transitory viewing only.</p>
+                
+                <h6>3. Disclaimer</h6>
+                <p>The materials on InventoryPro's website are provided "as is". InventoryPro makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties.</p>
+                
+                <h6>4. Limitations</h6>
+                <p>In no event shall InventoryPro or its suppliers be liable for any damages arising out of the use or inability to use the materials on InventoryPro's website.</p>
+                
+                <h6>5. Revisions</h6>
+                <p>The materials appearing on InventoryPro's website could include technical, typographical, or photographic errors. InventoryPro does not warrant that any of the materials on its website are accurate, complete, or current.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Information Collection</h6>
+                <p>We collect information from you when you register on our site, place an order, or fill out a form. When ordering or registering, we may ask you for your name, e-mail address, mailing address, phone number, or other information.</p>
+                
+                <h6>2. Information Use</h6>
+                <p>Any information we collect may be used to improve customer service, process transactions, send periodic emails, or administer promotions, surveys, or other site features.</p>
+                
+                <h6>3. Information Protection</h6>
+                <p>We implement a variety of security measures to maintain the safety of your personal information when you place an order or access your personal information.</p>
+                
+                <h6>4. Cookie Usage</h6>
+                <p>Cookies are small files that a site or its service provider transfers to your computer's hard drive through your browser that enables the site's systems to recognize your browser and capture and remember certain information.</p>
+                
+                <h6>5. Third Party Disclosure</h6>
+                <p>We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information without your consent.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,315 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    /* Custom Dashboard Styling */
+.container {
+    padding-top: 2rem !important;
+}
+
+/* Title Styling */
+h2 {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+h2:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60px;
+    height: 3px;
+    background: #3498db;
+    border-radius: 3px;
+}
+
+/* Card Styling */
+.card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Card Background Colors with Gradients */
+.bg-primary {
+    background: linear-gradient(135deg, #4e73df 0%, #224abe 100%) !important;
+}
+
+.bg-success {
+    background: linear-gradient(135deg, #1cc88a 0%, #13855c 100%) !important;
+}
+
+.bg-warning {
+    background: linear-gradient(135deg, #f6c23e 0%, #dda20a 100%) !important;
+}
+
+.bg-danger {
+    background: linear-gradient(135deg, #e74a3b 0%, #be2617 100%) !important;
+}
+
+/* Card Title Styling */
+.card-title {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+}
+
+/* Card Text (Numbers) Styling */
+.card-text {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Responsive Grid Spacing */
+.row {
+    margin-right: -0.75rem;
+    margin-left: -0.75rem;
+}
+
+.col-md-3 {
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+}
+
+/* Add subtle animation to numbers */
+@keyframes countUp {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card-text {
+    animation: countUp 0.5s ease-out forwards;
+}
+
+/* Add hover effect for better interactivity */
+.card:hover .card-text {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .col-md-3 {
+        margin-bottom: 1rem;
+    }
+    
+    .card-text {
+        font-size: 1.75rem;
+    }
+}
+    /* Existing styles */
+    .container {
+        padding-top: 2rem !important;
+    }
+
+    h2 {
+        color: #2c3e50;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 10px;
+    }
+
+    h2:after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 60px;
+        height: 3px;
+        background: #3498db;
+        border-radius: 3px;
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        margin-bottom: 1rem;
+    }
+
+    /* New styles for graphs section */
+    .graphs-container {
+        margin-top: 2rem;
+    }
+
+    .graph-card {
+        background: white;
+        border-radius: 15px;
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .graph-title {
+        font-size: 1.2rem;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    .dashboard-description {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 15px;
+        margin: 2rem 0;
+    }
+
+    .description-title {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .feature-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .feature-item {
+        background: white;
+        padding: 1rem;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    .feature-icon {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 0.5rem;
+    }
+</style>
+<div class="container py-4">
+    <h2>Dashboard</h2>
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card bg-primary text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Items</h5>
+                    <h2 class="card-text">{{ stats.total_items }}</h2> <!-- Corrected here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Total Value</h5>
+                    <h2 class="card-text">${{ "%.2f"|format(stats.total_value) }}</h2> <!-- Corrected here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-warning text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Low Stock</h5>
+                    <h2 class="card-text">{{ stats.low_stock }}</h2> <!-- Corrected here -->
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card bg-danger text-white">
+                <div class="card-body">
+                    <h5 class="card-title">Out of Stock</h5>
+                    <h2 class="card-text">{{ stats.out_of_stock }}</h2> <!-- Corrected here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-4">
+    <!-- Dashboard Description -->
+    <div class="dashboard-description">
+        <h3 class="description-title">Inventory Management System</h3>
+        <p>This comprehensive dashboard provides real-time insights into your inventory management system. Track stock levels, monitor inventory value, and identify potential supply chain issues at a glance.</p>
+        
+        <div class="feature-list">
+            <div class="feature-item">
+                <img src="{{ url_for('static', filename='image5.jpg') }}" alt="Stock Tracking" class="feature-icon">
+                <h4>Real-time Tracking</h4>
+                <p>Monitor stock levels across all warehouses</p>
+            </div>
+            <div class="feature-item">
+                <img src="{{ url_for('static', filename='image6.png') }}" alt="Analytics" class="feature-icon">
+                <h4>Analytics</h4>
+                <p>Advanced insights into inventory trends</p>
+            </div>
+            <div class="feature-item">
+                <img src="{{ url_for('static', filename='image8.webp') }}" alt="Alerts" class="feature-icon">
+                <h4>Smart Alerts</h4>
+                <p>Automatic notifications for low stock items</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphs Section -->
+    <div class="graphs-container">
+        <div class="row">
+            <!-- Stock Level Trends -->
+            <div class="col-md-6">
+                <div class="graph-card">
+                    <h4 class="graph-title">Stock Level Trends</h4>
+                    <img src="{{ url_for('static', filename='image4.jpeg') }}" alt="Stock Level Trends Graph" class="img-fluid">
+                </div>
+            </div>
+            
+            <!-- Inventory Value Over Time -->
+            <div class="col-md-6">
+                <div class="graph-card">
+                    <h4 class="graph-title">Inventory Value Trends</h4>
+                    <img src="{{ url_for('static', filename='image6.png') }}" alt="Inventory Value Graph" class="img-fluid">
+                </div>
+            </div>
+            
+            <!-- Category Distribution -->
+            <div class="col-md-6">
+                <div class="graph-card">
+                    <h4 class="graph-title">Category Distribution</h4>
+                    <img src="{{ url_for('static', filename='image7.png') }}" alt="Category Distribution Chart" class="img-fluid">
+                </div>
+            </div>
+            
+            <!-- Stock Alerts History -->
+            <div class="col-md-6">
+                <div class="graph-card">
+                    <h4 class="graph-title">Stock Alerts History</h4>
+                    <img src="{{ url_for('static', filename='image9.webp') }}" alt="Stock Alerts History Graph" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
